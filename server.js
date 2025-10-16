@@ -1,6 +1,8 @@
 // server.js
 const express = require('express');
 const path = require('path');
+require('dotenv').config();
+const { connectDB } = require('./models/db');
 const blogRoutes = require('./routes/blogRoutes');
 const imageRoutes = require('./routes/imageRoutes');
 const bodyParser = express.urlencoded; // built-in
@@ -10,6 +12,9 @@ const errorHandler = require('./middlewares/errorHandler');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Connect to MongoDB
+connectDB();
 
 // Inbuilt middlewares
 app.use(express.json()); // parse JSON bodies
